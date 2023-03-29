@@ -3,14 +3,23 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs14.x
+  region: us-east-1
+  # setup profile for AWS CLI.
+  profile: sandx
 
 functions:
-  hello:
-    handler: handler.hello
+  getProductsList:
+    handler: handler.getProductsList
     events:
       - httpApi:
-          path: /
+          path: /products
+          method: get
+  getProductsById :
+    handler: handler.getProductsById 
+    events:
+      - httpApi:
+          path: /products/{productId}
           method: get
 
 plugins:
