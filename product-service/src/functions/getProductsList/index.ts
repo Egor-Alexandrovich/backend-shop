@@ -7,6 +7,11 @@ export default {
       httpApi: {
         method: 'get',
         path: '/products',
+        responses: {
+          200: {
+            bodyType: 'ProductArray'
+          }
+        }
       },
     },
   ],

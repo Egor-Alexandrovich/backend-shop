@@ -1,5 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { Product, PRODUCTS_URL } from "src/const";
+import { PRODUCTS_URL } from "src/const";
+import { Product } from '../../types/product';
 import fetch from 'node-fetch';
 
 export const getProductsById = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {

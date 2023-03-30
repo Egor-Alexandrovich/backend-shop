@@ -1,10 +1,7 @@
-export type Product = {
-	id: string | undefined;
-	title: string;
-	description: string;
-	price: number;
-}
-export const PRODUCTS_URL = '';
+import {Product} from '../types/product';
+
+export const PRODUCTS_URL = 'http://mock-products.s3-website-us-east-1.amazonaws.com/product.json';
+
 export const PRODUCTS: Product[] = [
 	{
 		description: "Short Product Description1",
