@@ -7,6 +7,8 @@ provider:
   region: us-east-1
   # setup profile for AWS CLI.
   profile: sandx
+  httpApi:
+    cors: true
 
 functions:
   getProductsList:
@@ -21,6 +23,5 @@ functions:
       - httpApi:
           path: /products/{productId}
           method: get
-
 plugins:
   - serverless-plugin-typescript
