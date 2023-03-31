@@ -1,6 +1,4 @@
-import {Product} from '../types/product';
-
-export const PRODUCTS_URL = 'http://mock-products.s3-website-us-east-1.amazonaws.com/product.json';
+import { Product } from '../types/product';
 
 export const PRODUCTS: Product[] = [
 	{
@@ -40,3 +38,5 @@ export const PRODUCTS: Product[] = [
 		title: "ProductName",
 	},
 ];
+
+export const mockProducts = Promise.resolve(PRODUCTS);

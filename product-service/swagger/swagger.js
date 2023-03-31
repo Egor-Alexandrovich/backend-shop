@@ -22,7 +22,7 @@
           "200": {
             "description": "200 response",
             "schema": {
-              "$ref": "#/definitions/ProductArray"
+              "$ref": "#/definitions/ArrayProduct"
             }
           }
         }
@@ -51,7 +51,7 @@
           "200": {
             "description": "200 response",
             "schema": {
-              "$ref": "#/definitions/ProductArray"
+              "$ref": "#/definitions/Product"
             }
           }
         }
@@ -87,14 +87,6 @@
       "additionalProperties": false,
       "title": "Product",
       "type": "object"
-    },
-    "ProductArray": {
-      "items": {
-        "$ref": "#/definitions/Product",
-        "title": "ProductArray.[]"
-      },
-      "title": "ProductArray.[]",
-      "type": "array"
     }
   },
   "securityDefinitions": {},

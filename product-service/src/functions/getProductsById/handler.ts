@@ -1,22 +1,27 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { PRODUCTS_URL } from "src/const";
 import { Product } from '../../types/product';
-import fetch from 'node-fetch';
+import { mockProducts } from "../../const";
 
 export const getProductsById = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
-    const response = await fetch(PRODUCTS_URL);
-    const data: Product[]  = await response.json() as Product[];
-    
-    const id = event?.pathParameters?.productId
-    const resp = data.filter((product: Product) => product.id === id);
+    const response = await mockProducts;    
+    const id = event.pathParameters.productId
+    const resp = response.find((product: Product) => product.id === id);
+    if(resp){
+      return {
+        statusCode: 200,
+        body: JSON.stringify(resp),
+      };
+    }
     return {
-      statusCode: 200,
-      body: JSON.stringify(resp),
+      statusCode: 404,
+      body: JSON.stringify({
+        message: 'not Found'
+      }),
     };
   } catch (error) {
     return {
-      statusCode: 200,
+      statusCode: 500,
       body: JSON.stringify(error),
     };
   }

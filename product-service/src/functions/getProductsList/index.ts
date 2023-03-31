@@ -9,7 +9,7 @@ export default {
         path: '/products',
         responses: {
           200: {
-            bodyType: 'ProductArray'
+            bodyType: 'ArrayProduct'
           }
         }
       },
