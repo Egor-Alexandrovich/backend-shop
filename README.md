@@ -17,7 +17,7 @@
 
 ## 2
 Link to Product Service API - https://0dey54hzz5.execute-api.us-east-1.amazonaws.com/products
-Link to Frontend - 
+Link to Frontend - https://d3868coxg0kasg.cloudfront.net/
 
 ## 3
 Link to FE PR (YOUR OWN REPOSITORY) - https://github.com/Egor-Alexandrovich/backend-shop/pull/1

@@ -79,15 +79,3 @@ The project code base is mainly located within the `src` folder. This folder is 
 ### Advanced usage
 
 Any tsconfig.json can be used, but if you do, set the environment variable `TS_NODE_CONFIG` for building the application, eg `TS_NODE_CONFIG=./tsconfig.app.json npx serverless webpack`
-
-
-endpoints:
-  GET - https://0dey54hzz5.execute-api.us-east-1.amazonaws.com/products
-  GET - https://0dey54hzz5.execute-api.us-east-1.amazonaws.com/products/{productId}
-  GET - https://0dey54hzz5.execute-api.us-east-1.amazonaws.com/swagger
-  GET - https://0dey54hzz5.execute-api.us-east-1.amazonaws.com/swagger.json
-functions:
-  getProductsList: product-service-dev-getProductsList (1.9 kB)
-  getProductsById: product-service-dev-getProductsById (2.4 kB)
-  swaggerUI: product-service-dev-swagger-ui (2.6 kB)
-  swaggerJSON: product-service-dev-swagger-json (2.4 kB)

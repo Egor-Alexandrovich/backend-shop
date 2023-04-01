@@ -87,6 +87,14 @@
       "additionalProperties": false,
       "title": "Product",
       "type": "object"
+    },
+    "ArrayProduct": {
+      "items": {
+        "$ref": "#/definitions/Product",
+        "title": "ArrayProduct.[]"
+      },
+      "title": "ArrayProduct.[]",
+      "type": "array"
     }
   },
   "securityDefinitions": {},
