@@ -1,6 +1,6 @@
 import { getProductsById }  from '../functions/getProductsById/handler';
 import { eventJSON }from '../event/event-data';
-import { PRODUCTS } from '../const/products';
+import { ERROR_MESSAGE, PRODUCTS } from '../const/products';
 
 describe('Unit test for getProductsById handler', function () {
 	it('verify happy path 200', async () => {
@@ -20,10 +20,11 @@ describe('Unit test for getProductsById handler', function () {
 		const MOCK_EVENT = { 
 			...eventJSON, 
 			pathParameters:{
-				productId: null
+				productId: 'some-wrong-id'
 			}
 		}
 			const result = await getProductsById(MOCK_EVENT);
 			expect(result.statusCode).toEqual(404);
+			expect(JSON.parse(result.body).message).toEqual(ERROR_MESSAGE);
 	});
 });

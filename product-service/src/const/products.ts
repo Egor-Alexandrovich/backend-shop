@@ -1,5 +1,7 @@
 import { Product } from '../types/product';
 
+export const ERROR_MESSAGE = 'Product not found';
+
 export const PRODUCTS: Product[] = [
 	{
 		description: "Short Product Description1",

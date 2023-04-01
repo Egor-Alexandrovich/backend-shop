@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { Product } from '../../types/product';
-import { mockProducts } from "../../const";
+import { ERROR_MESSAGE, mockProducts } from "../../const";
 
 export const getProductsById = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
@@ -16,7 +16,7 @@ export const getProductsById = async (event: APIGatewayProxyEvent): Promise<APIG
     return {
       statusCode: 404,
       body: JSON.stringify({
-        message: 'not Found'
+        message: ERROR_MESSAGE
       }),
     };
   } catch (error) {
