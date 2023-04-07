@@ -6,7 +6,7 @@
  - Task 4.3
  - Task 4.4
 
-## Additional scope: 26
+## Additional scope: 30
 - Done +6  - POST /products lambda functions returns error 400 status code if product data is invalid
 - Done +6  - All lambdas return error 500 status code on any error (DB connection, any unhandled error in code)
 - Done +6  - All lambdas do console.log for each incoming requests and their arguments
@@ -20,6 +20,6 @@ Link to Product Service API - https://0dey54hzz5.execute-api.us-east-1.amazonaws
 Link to Frontend - https://d3868coxg0kasg.cloudfront.net/
 
 ## 3
-Link to FE PR (YOUR OWN REPOSITORY) - https://github.com/Egor-Alexandrovich/backend-shop/pull/1
+Link to FE PR (YOUR OWN REPOSITORY) - https://github.com/Egor-Alexandrovich/backend-shop/pull/2
 
 
