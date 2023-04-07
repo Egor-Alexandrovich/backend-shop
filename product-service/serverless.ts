@@ -74,23 +74,23 @@ const serverlessConfiguration: AWS = {
       schemes: ['https'],
     }
   },
-  resources:{
-    Resources:
-    {
-      ProductDatabase: {
-        Type: 'AWS::RDS::DBInstance',
-        Properties: {
-          AllocatedStorage: 5,
-          DBInstanceClass: 'db.t3.micro',
-          DBName: 'myapp',
-          Engine: 'mysql',
-          EngineVersion: '8.0.25',
-          MasterUsername: process.env.RDS_DB_INSTANCE_MASTER_USER_NAME,
-          MasterUserPassword: process.env.RDS_DB_INSTANCE_MASTER_USER_PASSWORD,
-        }
-      }
-    }
-  }
+  // resources:{
+  //   Resources:
+  //   {
+  //     ProductDatabase: {
+  //       Type: 'AWS::RDS::DBInstance',
+  //       Properties: {
+  //         AllocatedStorage: 5,
+  //         DBInstanceClass: 'db.t3.micro',
+  //         DBName: 'myapp',
+  //         Engine: 'mysql',
+  //         EngineVersion: '8.0.25',
+  //         MasterUsername: process.env.RDS_DB_INSTANCE_MASTER_USER_NAME,
+  //         MasterUserPassword: process.env.RDS_DB_INSTANCE_MASTER_USER_PASSWORD,
+  //       }
+  //     }
+  //   }
+  // }
 };
 
 module.exports = serverlessConfiguration;
