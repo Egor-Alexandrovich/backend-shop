@@ -6,31 +6,11 @@
     "version": "1"
   },
   "paths": {
-    "/products": {
+    "/import": {
       "get": {
-        "summary": "getProductsList",
+        "summary": "importProductsFile",
         "description": "",
-        "operationId": "getProductsList.get./products",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "schema": {
-              "$ref": "#/definitions/ArrayProduct"
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "createProduct",
-        "description": "",
-        "operationId": "createProduct.post./products",
+        "operationId": "importProductsFile.get./import",
         "consumes": [
           "application/json"
         ],
@@ -41,35 +21,6 @@
         "responses": {
           "200": {
             "description": "200 response"
-          }
-        }
-      }
-    },
-    "/products/{productId}": {
-      "get": {
-        "summary": "getProductsById",
-        "description": "",
-        "operationId": "getProductsById.get./products/{productId}",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "productId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "200 response",
-            "schema": {
-              "$ref": "#/definitions/Product"
-            }
           }
         }
       }
@@ -116,7 +67,6 @@
   },
   "securityDefinitions": {},
   "schemes": [
-    "https",
-    "http"
+    "https"
   ]
 };
