@@ -1,19 +1,18 @@
-# Task 3 (First API with AWS API Gateway and AWS Lambda)
+# Task 4 (Integration with NoSQL Database)
 ## 1
 ## What was done: 70
- - Task 3.1
- - Task 3.2
- - Task 3.3
+ - Task 4.1
+ - Task 4.2
+ - Task 4.3
+ - Task 4.4
 
-## Additional scope: 26
-- Done +5 - Async/await is used in lambda functions
-- Done +5 - ES6 modules are used for Product Service implementation
-- 0 - Custom Webpack/ESBuild/etc is manually configured for Product Service. Not applicable for preconfigured/built-in bundlers that come with templates, plugins, etc.
-- Done +4 (All languages) - SWAGGER documentation is created for Product Service
-- Done +4 (All languages) - Lambda handlers are covered by basic UNIT tests (NO infrastructure logic is needed to be covered)
-- Done +4 (All languages) - Lambda handlers (getProductsList, getProductsById) code is written not in 1 single module (file) and separated in codebase.
-- Done +4 (All languages) - Main error scenarios are handled by API ("Product not found" error).
-# Total: 96
+## Additional scope: 30
+- Done +6  - POST /products lambda functions returns error 400 status code if product data is invalid
+- Done +6  - All lambdas return error 500 status code on any error (DB connection, any unhandled error in code)
+- Done +6  - All lambdas do console.log for each incoming requests and their arguments
+- Done +6 (All languages) - Use RDS instance instead fo DynamoDB tables. Do not commit your environment variables in serverless.yml to github!
+- Done +6 (All languages) - Transaction based creation of product (in case stock creation is failed then related to this stock product is not created and not ready to be used by the end user and vice versa)
+# Total: 100
 
 ## 2
 Link to Product Service API - https://0dey54hzz5.execute-api.us-east-1.amazonaws.com/products
@@ -21,7 +20,6 @@ Link to Product Service API - https://0dey54hzz5.execute-api.us-east-1.amazonaws
 Link to Frontend - https://d3868coxg0kasg.cloudfront.net/
 
 ## 3
-Link to FE PR (YOUR OWN REPOSITORY) - https://github.com/Egor-Alexandrovich/backend-shop/pull/1
+Link to FE PR (YOUR OWN REPOSITORY) - https://github.com/Egor-Alexandrovich/backend-shop/pull/2
 
-## 4
-Link to SWAGGER - https://0dey54hzz5.execute-api.us-east-1.amazonaws.com/swagger
+

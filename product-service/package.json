@@ -4,13 +4,18 @@
   "description": "Serverless AWS API",
   "main": "serverless.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "fillTable": "node fillTable.js"
   },
   "engines": {
     "node": ">=14.15.0"
   },
   "dependencies": {
-    "node-fetch": "^3.3.1"
+    "@aws-sdk/client-dynamodb": "^3.306.0",
+    "@aws-sdk/util-dynamodb": "^3.306.0",
+    "@types/yup": "^0.29.14",
+    "uuid": "^9.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",
@@ -26,7 +31,8 @@
     "ts-jest": "^29.0.5",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.3",
+    "dotenv": "^16.0.3"
   },
   "author": "",
   "license": "MIT"

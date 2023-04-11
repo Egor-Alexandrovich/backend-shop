@@ -1,28 +1,28 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { Product } from '../../types/product';
-import { ERROR_MESSAGE, mockProducts } from "../../const";
+import { dynamoDBRepository as productRepository }  from '../../../repository';
+import { ERROR_MESSAGE } from '../../../repository/const';
 
 export const getProductsById = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  try {
-    const response = await mockProducts;    
+  console.log('incoming requests', event);
+  try { 
     const id = event.pathParameters.productId
-    const resp = response.find((product: Product) => product.id === id);
+    const resp = await productRepository.getById(id);
     if(resp){
       return {
         statusCode: 200,
-        body: JSON.stringify(resp),
+        body: JSON.stringify(resp, null, 2),
       };
     }
     return {
       statusCode: 404,
       body: JSON.stringify({
         message: ERROR_MESSAGE
-      }),
+      },  null, 2),
     };
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify(error),
+      body: JSON.stringify(error,  null, 2),
     };
   }
 };
