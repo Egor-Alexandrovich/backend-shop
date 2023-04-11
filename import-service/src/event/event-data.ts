@@ -14,8 +14,7 @@ export const eventJSON: APIGatewayProxyEvent = {
     "Header2": "value1,value2"
   },
   "queryStringParameters": {
-    "parameter1": "value1,value2",
-    "parameter2": "value"
+    "name": "test.csv",
   },
   "requestContext": {
     "accountId": "123456789012",
