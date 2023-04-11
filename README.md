@@ -1,25 +1,23 @@
-# Task 4 (Integration with NoSQL Database)
+# Task 5 (Integration with S3)
 ## 1
 ## What was done: 70
- - Task 4.1
- - Task 4.2
- - Task 4.3
- - Task 4.4
+ - Task 5.1
+ - Task 5.2
+ - Task 5.3
+ - Task 5.4
 
 ## Additional scope: 30
-- Done +6  - POST /products lambda functions returns error 400 status code if product data is invalid
-- Done +6  - All lambdas return error 500 status code on any error (DB connection, any unhandled error in code)
-- Done +6  - All lambdas do console.log for each incoming requests and their arguments
-- Done +6 (All languages) - Use RDS instance instead fo DynamoDB tables. Do not commit your environment variables in serverless.yml to github!
-- Done +6 (All languages) - Transaction based creation of product (in case stock creation is failed then related to this stock product is not created and not ready to be used by the end user and vice versa)
+- Done +10  - async/await is used in lambda functions
+- Done +10  - importProductsFile lambda is covered by unit tests. (for JS only) aws-sdk-mock can be used to mock S3 methods
+- Done +10  -At the end of the stream the lambda function should move the file from the uploaded folder into the parsed folder (move the file means that file should be copied into a new folder in the same bucket called parsed, and then deleted from uploaded folder)
 # Total: 100
 
 ## 2
-Link to Product Service API - https://0dey54hzz5.execute-api.us-east-1.amazonaws.com/products
+Link to Import Service API - https://8ku2x40mcc.execute-api.us-east-1.amazonaws.com/import?name=test.csv
 
 Link to Frontend - https://d3868coxg0kasg.cloudfront.net/
 
 ## 3
-Link to FE PR (YOUR OWN REPOSITORY) - https://github.com/Egor-Alexandrovich/backend-shop/pull/2
+Link to BE PR (YOUR OWN REPOSITORY) - https://github.com/Egor-Alexandrovich/backend-shop/pull/3
 
 
