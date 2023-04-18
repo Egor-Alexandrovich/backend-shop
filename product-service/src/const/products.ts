@@ -1,6 +1,7 @@
 import { Product } from '../types/product';
 
 export const ERROR_MESSAGE = 'Product not found';
+export const REGION = 'us-east-1';
 
 export const PRODUCTS: Product[] = [
 	{

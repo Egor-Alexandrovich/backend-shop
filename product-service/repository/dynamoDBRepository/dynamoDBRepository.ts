@@ -1,12 +1,30 @@
 import * as AWS from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
-import { IProductService, Product, Stocks, CreateProduct } from '../types';
-import { PutItemCommandOutput } from "@aws-sdk/client-dynamodb";
+import { IProductService, Product, Stocks, CreateProductSchema, CreateProduct } from '../types';
+import { v4 } from 'uuid';
+
 
 const client = new AWS.DynamoDB({ region: "us-east-1" });
 
-class DynamoDB implements IProductService {
+class DynamoDB implements Partial<IProductService> {
 	constructor() { }
+	async createProduct(body: CreateProduct ): Promise<any> {
+		const id: string = v4();
+		console.log('body', body);
+		const normalizedBody = CreateProductSchema.cast(body);
+		console.log('normalizedBody', normalizedBody);
+    const createProduct = await CreateProductSchema.validate(normalizedBody,{ strict: true });
+    const { count, ...rest } = createProduct;
+    const product: Product = { ...rest, id };
+    const stocks = {
+      product_id: id,
+      count
+    }
+		return {
+			product,
+			stocks
+		}
+	}
 	async listAllProduct(): Promise<Product[]> {
 		const { Items } = await client.scan({ TableName: process.env.PRODUCT_TABLE_NAME })
 		const resp = Items?.map((item) => unmarshall(item));
@@ -35,22 +53,6 @@ class DynamoDB implements IProductService {
 		})
 	}
 	
-	// async createProduct(product: Product): Promise<PutItemCommandOutput> {
-	// 	const params = {
-	// 		TableName: process.env.PRODUCT_TABLE_NAME,
-	// 		Item: marshall(product),
-	// 	};
-
-	// 	return await client.putItem(params);
-	// }
-	// async createStocks(stocks: Stocks): Promise<PutItemCommandOutput> {
-	// 	const params = {
-	// 		TableName: process.env.STOCKS_TABLE_NAME,
-	// 		Item: marshall(stocks),
-	// 	};
-
-	// 	return await client.putItem(params);
-	// }
 	async delete() {
 		return Promise.resolve()
 	}

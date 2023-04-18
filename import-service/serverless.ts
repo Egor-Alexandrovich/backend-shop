@@ -37,6 +37,15 @@ const serverlessConfiguration: AWS = {
             Resource: [
               process.env.S3_BUCKET_ARN_ARN,
             ]
+          },
+          {
+            Effect: 'Allow',
+            Action: [
+              'sqs:*',
+            ],
+            Resource: [
+              process.env.SQS_ARN,
+            ]
           }
         ]
       }
@@ -48,6 +57,7 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      SQS_URL: process.env.SQS_URL,
     },
   },
   functions: { importProductsFile, importFileParser },

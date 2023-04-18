@@ -1,14 +1,14 @@
 import { S3Event } from "aws-lambda";
 import { S3Client, CopyObjectCommand, GetObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
 import { REGION, BUCKET, PREFIX_PARSED, PREFIX_UPLOADED } from "src/const";
 import { Readable } from "node:stream";
 import csv from 'csv-parser';
 
-
-
 export const importFileParser = async (event: S3Event) => {
-  const client = new S3Client({ region: REGION });
-  const results = [];
+  const s3Client = new S3Client({ region: REGION });
+  const sqsClient = new SQSClient({ region: REGION });
+
   const key = event.Records[0].s3.object.key
 
   const command = new GetObjectCommand({
@@ -16,14 +16,19 @@ export const importFileParser = async (event: S3Event) => {
     Key: key
   });
 
-  const stream = (await client.send(command)).Body as Readable;
+  const stream = (await s3Client.send(command)).Body as Readable;
 
   stream.pipe(csv()).on('data', (data) => {
-    console.log('Chunk', data);
-    results.push(data);
+    sqsClient.send(
+      new SendMessageCommand({
+        QueueUrl: process.env.SQS_URL,
+        MessageBody: JSON.stringify(data),
+      })
+    );
+    console.log('Data send to Queue');
   }
   );
-  await client.send(new CopyObjectCommand(
+  await s3Client.send(new CopyObjectCommand(
     {
       Bucket: BUCKET,
       CopySource: `${BUCKET}/${key}`,
@@ -31,7 +36,7 @@ export const importFileParser = async (event: S3Event) => {
     }
   ));
 
-  await client.send(new DeleteObjectCommand(
+  await s3Client.send(new DeleteObjectCommand(
     {
       Bucket: BUCKET,
       Key: key,

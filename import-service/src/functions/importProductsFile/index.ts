@@ -7,11 +7,6 @@ export default {
       httpApi: {
         method: 'get',
         path: '/import',
-        // responses: {
-        //   200: {
-        //     bodyType: 'ArrayProduct'
-        //   }
-        // }
       },
     },
   ],
