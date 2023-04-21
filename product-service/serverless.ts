@@ -113,6 +113,7 @@ const serverlessConfiguration: AWS = {
           TopicArn: {
             Ref: "SNSTopic"
           },
+          FilterPolicyScope: 'MessageAttributes',
           FilterPolicy: {
             "price": [{"numeric": ["<", 50]}]
           }
@@ -126,6 +127,7 @@ const serverlessConfiguration: AWS = {
           TopicArn: {
             Ref: "SNSTopic"
           },
+          FilterPolicyScope: 'MessageAttributes',
           FilterPolicy: {
             "price": [{"numeric": [">=", 50]}]
           }

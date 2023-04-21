@@ -6,28 +6,47 @@ import { dynamoDBRepository as productRepository } from '../../../repository';
 export const catalogBatchProcess = async (event: SQSEvent) => {
 	try {
 		const message = event.Records.map(({ body }) => JSON.parse(body));
-		console.log('message', message)
+
 		const productAndStocks = await Promise.all(message.map((body) => productRepository.createProduct(body)));
-		console.log('productAndStocks', productAndStocks)
 
 		await Promise.all(productAndStocks.map(({ product, stocks }) => productRepository.create(product, stocks)));
 
-		console.log('productAndStocks created')
-		const  snsClient = new SNSClient({ region: REGION });
+		const snsClient = new SNSClient({ region: REGION });
 
-		const NOTIFICATION = message.map((product) => `Product ${product.title} was created`).join(' ')
+		const response = await Promise.all(message.map((body) =>
+			snsClient.send(
+				new PublishCommand({
+					TopicArn: process.env.SNS_ARN,
+					Message: JSON.stringify(body),
+					Subject: "NEW Product for creating",
+					MessageAttributes: {
+						price: {
+							DataType: 'Number',
+							StringValue: body.price,
+						}
+					}
+				})
+			)
+		));
+		
+		console.log('response from sns', response);
 
-		const input = { // PublishInput
-			TopicArn: process.env.SNS_ARN,
-			Message: NOTIFICATION,
-			Subject: "NEW Product for creating",
-		};
-		const command = new PublishCommand(input);
-		const response = await snsClient.send(command);
-		console.log('response from sns',response);
-
-		console.log('Message from queue', message);
 	} catch (error) {
-		console.log('Error catalogBatchProcess', error);
+		if (error.name && error.name === 'ValidationError') {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          message: error
+        }, null, 2),
+      };
+    }
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        message: "Something went wrong",
+        errorMsg: error.message,
+        errorStack: error.stack,
+      }, null, 2),
+    };
 	}
 };
