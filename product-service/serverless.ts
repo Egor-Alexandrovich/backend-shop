@@ -18,7 +18,16 @@ const serverlessConfiguration: AWS = {
     region: 'us-east-1',
     profile: 'sandx',
     httpApi: {
-      cors: true
+      cors: true,
+      authorizers: {
+        httpApiRequestAuthorizer: {
+          name: 'basicAuthorizer',
+          type: 'request',
+          functionArn: process.env.AUTHORIZATION_ARN,
+          enableSimpleResponses: true,
+          payloadVersion: '2.0'
+        }
+      }
     },
     iam: {
       role: {
