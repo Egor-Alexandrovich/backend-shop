@@ -10,6 +10,7 @@ export const getProductsList = async (event: APIGatewayProxyEvent): Promise<APIG
       const stocks = stocksList.find((stock) => stock.product_id === product.id );
       return { ...product, count: stocks.count }
     })
+    console.log('incoming requests resp', resp);
     if(resp) {
       return {
         statusCode: 200,

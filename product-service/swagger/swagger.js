@@ -116,7 +116,6 @@
   },
   "securityDefinitions": {},
   "schemes": [
-    "https",
-    "http"
+    "https"
   ]
 };

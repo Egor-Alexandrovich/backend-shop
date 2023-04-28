@@ -1,4 +1,3 @@
-import { PutItemCommandOutput } from "@aws-sdk/client-dynamodb";
 import * as Yup from "yup";
 
 export const ProductSchema = Yup.object({
@@ -35,8 +34,6 @@ export interface IProductService {
 	listAllProduct():  Promise<Product[]>;
 	listAllStocks():  Promise<Stocks[]>;
 	getById(id: string): Promise<Product | boolean>;
-	// createProduct(product: Product): Promise<PutItemCommandOutput>;
-	// createStocks(stocks: Stocks): Promise<PutItemCommandOutput>;
 	create(product: Product, stock: Stocks): Promise<any>;
 	delete(): Promise<any>;
 	update(): Promise<any>;
