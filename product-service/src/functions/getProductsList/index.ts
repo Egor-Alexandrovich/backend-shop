@@ -11,9 +11,6 @@ export default {
           200: {
             bodyType: 'ArrayProduct'
           }
-        },
-        authorizer: {
-          name: 'basicAuthorizer',
         }
       },
     },

@@ -8,15 +8,12 @@ dotenv.config()
 const serverlessConfiguration: AWS = {
   service: 'import-service',
   frameworkVersion: '3',
-  plugins: ['serverless-auto-swagger','serverless-esbuild','serverless-offline'],
+  plugins: ['serverless-esbuild', 'serverless-offline'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
     region: 'us-east-1',
     profile: 'sandx',
-    httpApi: {
-      cors: true
-    },  
     iam: {
       role: {
         statements: [
@@ -73,14 +70,39 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 10,
     },
-    autoswagger: {
-      title: 'My Shop Api Swagger',
-      apiType: 'httpApi',
-      typefiles: ['./src/types/product.d.ts'],
-      generateSwaggerOnDeploy: true,
-      schemes: ['https'],
-    }
   },
+  resources: {
+    Resources: {
+      GatewayResponseAccessDenied: {
+        Type: "AWS::ApiGateway::GatewayResponse",
+        Properties: {
+          ResponseParameters: {
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'"
+          },
+          ResponseType: "ACCESS_DENIED",
+          RestApiId: {
+            Ref: "ApiGatewayRestApi"
+          },
+          StatusCode: "403"
+        }
+      },
+      GatewayResponseUnauthorized: {
+        Type: "AWS::ApiGateway::GatewayResponse",
+        Properties: {
+          ResponseParameters: {
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'"
+          },
+          ResponseType: "UNAUTHORIZED",
+          RestApiId: {
+            Ref: "ApiGatewayRestApi"
+          },
+          StatusCode: "401"
+        }
+      }
+    }
+  }
 };
 
 module.exports = serverlessConfiguration;

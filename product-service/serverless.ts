@@ -19,15 +19,6 @@ const serverlessConfiguration: AWS = {
     profile: 'sandx',
     httpApi: {
       cors: true,
-      authorizers: {
-        httpApiRequestAuthorizer: {
-          name: 'basicAuthorizer',
-          type: 'request',
-          functionArn: process.env.AUTHORIZATION_ARN,
-          enableSimpleResponses: true,
-          payloadVersion: '2.0'
-        }
-      }
     },
     iam: {
       role: {
@@ -69,8 +60,8 @@ const serverlessConfiguration: AWS = {
       PRODUCT_TABLE_NAME: process.env.PRODUCT_TABLE_NAME,
       STOCKS_TABLE_NAME: process.env.STOCKS_TABLE_NAME,
       SQS_ARN: {
-        "Fn::GetAtt" : [
-          "SQSQueue", 
+        "Fn::GetAtt": [
+          "SQSQueue",
           "Arn"
         ]
       },
@@ -124,7 +115,7 @@ const serverlessConfiguration: AWS = {
           },
           FilterPolicyScope: 'MessageAttributes',
           FilterPolicy: {
-            "price": [{"numeric": ["<", 50]}]
+            "price": [{ "numeric": ["<", 50] }]
           }
         }
       },
@@ -138,7 +129,7 @@ const serverlessConfiguration: AWS = {
           },
           FilterPolicyScope: 'MessageAttributes',
           FilterPolicy: {
-            "price": [{"numeric": [">=", 50]}]
+            "price": [{ "numeric": [">=", 50] }]
           }
         }
       }
