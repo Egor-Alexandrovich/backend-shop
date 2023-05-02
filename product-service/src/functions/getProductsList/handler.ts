@@ -1,5 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { dynamoDBRepository as productRepository }  from '../../../repository/dynamoDBRepository';
+import { mockDBRepository as productRepository }  from '../../../repository/mockDBRepository';
 
 export const getProductsList = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   console.log('incoming requests', event);

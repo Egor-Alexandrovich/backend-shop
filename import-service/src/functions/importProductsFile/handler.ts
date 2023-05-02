@@ -20,6 +20,9 @@ export const importProductsFile = async (event: APIGatewayProxyEvent) => {
 
       return {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify({
           url
         }, null, 2),
@@ -27,13 +30,19 @@ export const importProductsFile = async (event: APIGatewayProxyEvent) => {
     }
     return {
       statusCode: 404,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({
         message: ERROR_MESSAGE_INVALID_PATH
-      },  null, 2),
+      }, null, 2),
     };
   } catch (error) {
     return {
       statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify(error, null, 2),
     };
   }

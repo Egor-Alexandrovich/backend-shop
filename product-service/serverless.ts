@@ -18,7 +18,7 @@ const serverlessConfiguration: AWS = {
     region: 'us-east-1',
     profile: 'sandx',
     httpApi: {
-      cors: true
+      cors: true,
     },
     iam: {
       role: {
@@ -60,8 +60,8 @@ const serverlessConfiguration: AWS = {
       PRODUCT_TABLE_NAME: process.env.PRODUCT_TABLE_NAME,
       STOCKS_TABLE_NAME: process.env.STOCKS_TABLE_NAME,
       SQS_ARN: {
-        "Fn::GetAtt" : [
-          "SQSQueue", 
+        "Fn::GetAtt": [
+          "SQSQueue",
           "Arn"
         ]
       },
@@ -115,7 +115,7 @@ const serverlessConfiguration: AWS = {
           },
           FilterPolicyScope: 'MessageAttributes',
           FilterPolicy: {
-            "price": [{"numeric": ["<", 50]}]
+            "price": [{ "numeric": ["<", 50] }]
           }
         }
       },
@@ -129,7 +129,7 @@ const serverlessConfiguration: AWS = {
           },
           FilterPolicyScope: 'MessageAttributes',
           FilterPolicy: {
-            "price": [{"numeric": [">=", 50]}]
+            "price": [{ "numeric": [">=", 50] }]
           }
         }
       }
